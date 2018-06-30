@@ -2,31 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System;
-using System.Configuration;
-using System.Collections.Specialized;
-
 using System.Threading.Tasks;
 
-namespace ConsoleApp1LeerContenidoArchivoConfig
+namespace FacadeEjemploPattern
 {
     class Program
     {
         static void Main(string[] args)
         {
-            string sAttr;
+            Mortgage mortgage = new Mortgage();
 
-            // Read a particular key from the config file            
-            sAttr = ConfigurationManager.AppSettings.Get("Key0");
-            Console.WriteLine("The value of Key0: " + sAttr);
+            Cliente cliente = new Cliente("Ann McKinsey");
+            // Evaluate mortgage eligibility for customer
 
-            // Read all the keys from the config file
-            NameValueCollection sAll;
-            sAll = ConfigurationManager.AppSettings;
+          
+            bool eligible = mortgage.IsEligible(cliente, 125000);
 
-            foreach (string s in sAll.AllKeys)
-                Console.WriteLine("Key: " + s + " Value: " + sAll.Get(s));
-            Console.ReadLine();
+            Console.WriteLine("\n" + cliente.Name +
+                " has been " + (eligible ? "Approved" : "Rejected"));
+
+            // Wait for user
+
+            Console.ReadKey();
         }
-    }
+    } 
 }
